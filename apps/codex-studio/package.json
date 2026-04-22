@@ -1,0 +1,11 @@
+{
+  "name": "codex-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Editor-first Codex app shell with live dev mode.",
+  "scripts": {
+    "dev": "node --watch server.mjs",
+    "start": "node server.mjs"
+  }
+}

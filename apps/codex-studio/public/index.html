@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Codex Studio</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Local Codex Bridge</p>
+          <h1>Codex Studio</h1>
+          <p class="brand-copy">Editor, inline completion, chat, and terminal without the extra clutter.</p>
+        </div>
+        <form id="workspace-form" class="workspace-form">
+          <label class="field-label" for="workspace-input">Workspace</label>
+          <div class="workspace-controls">
+            <input id="workspace-input" type="text" placeholder="/path/to/project" />
+            <button class="accent small" type="submit">Open</button>
+          </div>
+        </form>
+        <div class="topbar-actions">
+          <div class="status-pill" id="connection-status">Connecting…</div>
+          <button id="new-file-button" class="secondary" type="button">New File</button>
+          <button id="new-folder-button" class="secondary" type="button">New Folder</button>
+          <button id="save-button" class="secondary" type="button">Save</button>
+          <button id="fim-button" class="accent" type="button">Predict</button>
+        </div>
+      </header>
+      <div class="app-notice hidden" id="app-notice"></div>
+
+      <main class="app-grid">
+        <aside class="panel left-panel">
+          <div class="panel-header">
+            <h2>Explorer</h2>
+            <input id="search-input" type="search" placeholder="Jump to file…" />
+          </div>
+          <div id="search-results" class="search-results hidden"></div>
+          <div id="tree-root" class="tree-root"></div>
+        </aside>
+
+        <section class="center-column">
+          <section class="panel editor-panel">
+            <div id="tab-strip" class="tab-strip"></div>
+            <div class="editor-toolbar">
+              <div class="editor-meta">
+                <strong id="editor-file-label">No file selected</strong>
+                <span id="editor-language">Plain text</span>
+              </div>
+              <div class="editor-status">
+                <span id="editor-dirty-state">Saved</span>
+                <span class="shortcut-hint">`Ctrl/Cmd+S` save, `Ctrl/Cmd+Space` predict</span>
+              </div>
+            </div>
+            <div class="editor-shell">
+              <div id="line-numbers" class="line-numbers"></div>
+              <div class="editor-stage">
+                <pre id="editor-prediction" class="editor-prediction" aria-hidden="true"></pre>
+                <textarea
+                  id="editor-input"
+                  class="editor-input"
+                  spellcheck="false"
+                  autocomplete="off"
+                  autocapitalize="off"
+                ></textarea>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel terminal-panel">
+            <div class="panel-header">
+              <h2>Run / Dev Console</h2>
+              <button id="stop-command" class="secondary small" type="button">Stop</button>
+            </div>
+            <form id="command-form" class="command-form">
+              <input
+                id="command-input"
+                type="text"
+                placeholder="npm run dev, cargo test, just fmt…"
+              />
+              <button class="accent" type="submit">Run</button>
+            </form>
+            <pre id="terminal-output" class="terminal-output"></pre>
+          </section>
+        </section>
+
+        <aside class="panel codex-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Codex Chat</h2>
+              <p class="panel-subtitle">Attach a selection with `Ctrl/Cmd+I` or send from the current file.</p>
+            </div>
+            <div class="panel-actions">
+              <button id="stop-codex" class="secondary small" type="button">Stop</button>
+            </div>
+          </div>
+          <div class="codex-toolbar">
+            <div class="codex-toolbar-actions">
+              <button id="attach-file-button" class="secondary small" type="button">Attach File</button>
+              <button id="clear-contexts" class="secondary small" type="button">Clear Context</button>
+            </div>
+            <div id="context-summary" class="context-summary">No context attached.</div>
+          </div>
+          <div id="context-pills" class="context-pills"></div>
+          <div class="chat-log-shell">
+            <div id="chat-empty-state" class="chat-empty-state">
+              <strong>Useful prompts work better than empty chrome.</strong>
+              <span>Ask for a patch, explanation, refactor, or test command. The attached context stays until you clear it.</span>
+            </div>
+            <div id="chat-log" class="chat-log"></div>
+          </div>
+          <form id="chat-form" class="chat-form">
+            <textarea
+              id="chat-input"
+              class="chat-input"
+              placeholder="Ask Codex for edits, explanations, or next steps…"
+            ></textarea>
+            <div class="chat-form-actions">
+              <span class="shortcut-hint">`Ctrl/Cmd+Enter` send</span>
+              <button class="accent" type="submit">Send</button>
+            </div>
+          </form>
+        </aside>
+      </main>
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

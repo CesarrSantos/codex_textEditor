@@ -8,8 +8,8 @@ If you want Codex in your code editor (VS Code, Cursor, Windsurf), <a href="http
 </br>If you want the desktop app experience, run <code>codex app</code> or visit <a href="https://chatgpt.com/codex?app-landing-page=true">the Codex App page</a>.
 </br>If you are looking for the <em>cloud-based agent</em> from OpenAI, <strong>Codex Web</strong>, go to <a href="https://chatgpt.com/codex">chatgpt.com/codex</a>.</p>
 
----
 
+---
 ## Quickstart
 
 ### Installing and running Codex CLI
@@ -56,5 +56,33 @@ You can also use Codex with an API key, but this requires [additional setup](htt
 - [**Contributing**](./docs/contributing.md)
 - [**Installing & building**](./docs/install.md)
 - [**Open source fund**](./docs/open-source-fund.md)
+
+## Codex Studio Dev App
+
+This fork now includes an editor-first local app shell at [`apps/codex-studio`](./apps/codex-studio).
+
+Run it from the repo root:
+
+```bash
+npm run app:dev
+```
+
+Then open `http://127.0.0.1:3456`.
+
+The dev app starts a local `codex app-server` websocket process automatically and provides:
+
+- workspace explorer + file tabs
+- syntax-aware code editor
+- Codex chat with editor-context attachment via `Ctrl/Cmd+I`
+- FIM-style inline completion via `Ctrl/Cmd+Space`
+- live command output for local dev/test commands
+
+It also exposes OpenAI-compatible endpoints for external tools at `http://127.0.0.1:3456/v1`:
+
+- `GET /v1/models`
+- `POST /v1/chat/completions`
+- `POST /v1/completions`
+
+That makes it usable from Continue with an `openai` provider pointed at the local app and `useResponsesApi: false`. For autocomplete, Continue can target the same base URL with `useLegacyCompletionsEndpoint: true`.
 
 This repository is licensed under the [Apache-2.0 License](LICENSE).
